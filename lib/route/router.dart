@@ -22,6 +22,13 @@ final router = GoRouter(
             return BasicScreen();
           },
         ),
+        GoRoute(
+          path: 'named',
+          name: 'named_screen',
+          builder: (context, state) {
+            return BasicScreen();
+          },
+        ),
       ],
     ),
   ],
