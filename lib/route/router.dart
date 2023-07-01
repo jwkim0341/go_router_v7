@@ -3,6 +3,7 @@ import 'package:go_router_v7/screens/1_basic_screen.dart';
 import 'package:go_router_v7/screens/3_push_screen.dart';
 import 'package:go_router_v7/screens/4_pop_base_screen.dart';
 import 'package:go_router_v7/screens/5_pop_return_screen.dart';
+import 'package:go_router_v7/screens/6_path_param_screen.dart';
 import 'package:go_router_v7/screens/root_screen.dart';
 
 // https://blog.codefactory.ai == / -> path
@@ -50,6 +51,19 @@ final router = GoRouter(
               builder: (context, state) {
                 // /pop/return
                 return PopReturnScreen();
+              },
+            ),
+          ],
+        ),
+        GoRoute(
+          path: 'path_param/:id',
+          builder: (context, state) {
+            return PathParamScreen();
+          },
+          routes: [
+            GoRoute(path: ':name',
+              builder: (context, state) {
+                return PathParamScreen();
               },
             ),
           ],
