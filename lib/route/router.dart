@@ -1,5 +1,6 @@
 import 'package:go_router/go_router.dart';
 import 'package:go_router_v7/screens/1_basic_screen.dart';
+import 'package:go_router_v7/screens/3_push_screen.dart';
 import 'package:go_router_v7/screens/root_screen.dart';
 
 // https://blog.codefactory.ai == / -> path
@@ -27,6 +28,12 @@ final router = GoRouter(
           name: 'named_screen',
           builder: (context, state) {
             return BasicScreen();
+          },
+        ),
+        GoRoute(
+          path: 'push',
+          builder: (context, state) {
+            return PushScreen();
           },
         ),
       ],
