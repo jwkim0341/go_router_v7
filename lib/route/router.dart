@@ -1,4 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
+import 'package:go_router_v7/screens/10_transition_screen_1.dart';
+import 'package:go_router_v7/screens/10_transition_screen_2.dart';
 import 'package:go_router_v7/screens/1_basic_screen.dart';
 import 'package:go_router_v7/screens/3_push_screen.dart';
 import 'package:go_router_v7/screens/4_pop_base_screen.dart';
@@ -20,10 +23,10 @@ bool authState = false;
 // / -> home
 // /basic -> basic screen
 final router = GoRouter(
-  redirect: (context,state){
+  redirect: (context, state) {
     // return string (path) -> 해당 라우트로 이동한다 (path)
     // return null -> 원리 이동하려던 라우트로 이동한다.
-    if(state.location == '/login/private' && !authState){
+    if (state.location == '/login/private' && !authState) {
       // 반환하다가 막힘
       return '/login';
     }
@@ -137,14 +140,42 @@ final router = GoRouter(
           builder: (_, state) => LoginScreen(),
           routes: [
             GoRoute(
-              path: 'private',
-              builder: (_, state) => PrivateScreen(),
-              redirect: (context,state){
-                if(!authState){
-                  return '/login2';
-                }
-                return null;
-              }
+                path: 'private',
+                builder: (_, state) => PrivateScreen(),
+                redirect: (context, state) {
+                  if (!authState) {
+                    return '/login2';
+                  }
+                  return null;
+                }),
+          ],
+        ),
+        GoRoute(
+          path: 'transition',
+          builder: (_, state) => TransitionScreenOne(),
+          routes: [
+            GoRoute(
+              path: 'detail',
+              pageBuilder: (_, state) => CustomTransitionPage(
+                // 속도조절
+                transitionDuration: Duration(seconds: 3),
+                transitionsBuilder:
+                    (context, animation, secondaryAnimation, child) {
+                  // return FadeTransition(
+                  //   opacity: animation,
+                  //   child: child, // 하단 child
+                  // );
+                  // return ScaleTransition(
+                  //   scale: animation,
+                  //   child: child,
+                  // );
+                  return RotationTransition(
+                    turns: animation,
+                    child: child,
+                  );
+                },
+                child: TransitionScreenTwo(),
+              ),
             ),
           ],
         ),
