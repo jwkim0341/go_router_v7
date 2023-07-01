@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
 import 'package:go_router_v7/screens/10_transition_screen_1.dart';
 import 'package:go_router_v7/screens/10_transition_screen_2.dart';
+import 'package:go_router_v7/screens/11_error_screen.dart';
 import 'package:go_router_v7/screens/1_basic_screen.dart';
 import 'package:go_router_v7/screens/3_push_screen.dart';
 import 'package:go_router_v7/screens/4_pop_base_screen.dart';
@@ -161,17 +162,9 @@ final router = GoRouter(
                 transitionDuration: Duration(seconds: 3),
                 transitionsBuilder:
                     (context, animation, secondaryAnimation, child) {
-                  // return FadeTransition(
-                  //   opacity: animation,
-                  //   child: child, // 하단 child
-                  // );
-                  // return ScaleTransition(
-                  //   scale: animation,
-                  //   child: child,
-                  // );
-                  return RotationTransition(
-                    turns: animation,
-                    child: child,
+                  return FadeTransition(
+                    opacity: animation,
+                    child: child, // 하단 child
                   );
                 },
                 child: TransitionScreenTwo(),
@@ -182,4 +175,5 @@ final router = GoRouter(
       ],
     ),
   ],
+  errorBuilder: (context,state) => ErrorScreen(error:state.error.toString(),),
 );
